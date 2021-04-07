@@ -1,5 +1,15 @@
-players = [0, 1];
-start = 0;
+let players = [0, 1];
+let start = 0;
+
+AllLines = [  setBits([0,1,2]), // 1st row
+              setBits([3,4,5]), // 2nd row
+              setBits([6,7,8]), // 3rd row
+              setBits([0,3,6]), // 1st column
+              setBits([1,4,7]), // 2nd column
+              setBits([2,5,8]), // 3rd column
+              setBits([0,4,8]), // falling diagonal
+              setBits([2,4,6]) // rising diagonal
+            ];
 
 function setBits(bits) {
     result = 0;
@@ -47,8 +57,8 @@ function allFree(state) {
 };
 
 function nextStates(state, player) {
-    empty = allFree(state);
-    result = [];
+    const empty = allFree(state);
+    let result = [];
     empty.forEach(i => {
         nextState = state | setBit((player * 9) + i);
         result.push(nextState);
@@ -63,22 +73,6 @@ console.log("nextStates: \n");
 nextStates(state, 0).forEach(i => {
     console.log(toBoard(i));
 }); **/
-
-AllLines = [  setBits([0,1,2]), // 1st row
-              setBits([3,4,5]), // 2nd row
-              setBits([6,7,8]), // 3rd row
-              setBits([0,3,6]), // 1st column
-              setBits([1,4,7]), // 2nd column
-              setBits([2,5,8]), // 3rd column
-              setBits([0,4,8]), // falling diagonal
-              setBits([2,4,6]), // rising diagonal
-            ];
-
-/**
-AllLines.forEach(i => {
-    console.log(toBoard(i));
-});
-**/
 
 function utility(state, player) {
     for (let i = 0; i < AllLines.length; i++) {
@@ -156,3 +150,4 @@ function finalMsg(state) {
 /**
 finalMsg(setBits([0, 2, 3, 6, 1+9,  4+9, 5+9]));
 **/
+module.exports = { players, start, finished, toBoard, nextStates, utility, getMove, finalMsg }
