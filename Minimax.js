@@ -11,7 +11,7 @@ function other(player) {
             return game.players[i];
         }
     }
-}
+};
 
 function cacheValue(state, player) {
     if (cache[[state, player]] !== undefined) {
@@ -20,7 +20,7 @@ function cacheValue(state, player) {
     let val = value(state, player);
     cache[[state, player]] = val;
     return val;
-}
+};
 
 function value(state, player) {
     numValueCalls += 1;
@@ -36,7 +36,7 @@ function value(state, player) {
         }
     });
     return result;
-}
+};
 
 function bestMove(state, player) {
     let ns = game.nextStates(state, player);
@@ -50,7 +50,7 @@ function bestMove(state, player) {
     let rand = Math.floor(Math.random() * bestMoves.length);
     let bestState = bestMoves[rand];
     return [bestValue, bestState];
-}
+};
 
 function playGame() {
     let state = game.start;
@@ -72,15 +72,15 @@ function playGame() {
             return;
         }
     }
-}
+};
 
-console.time("Cachetime");
+//console.time("Cachetime");
 
 val = cacheValue(game.start, 0);
 
-console.timeEnd("Cachetime");
+//console.timeEnd("Cachetime");
 console.log(numValueCalls);
 console.log(Object.keys(cache).length);
 
 
-//playGame();
+playGame();

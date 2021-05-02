@@ -12,7 +12,7 @@ AllLines = [  setBits([0,1,2]), // 1st row
             ];
 
 function setBits(bits) {
-    result = 0;
+    let result = 0;
     bits.forEach(bit => {
         result = result | 1 << bit;
     });
