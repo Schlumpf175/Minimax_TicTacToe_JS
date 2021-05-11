@@ -23,24 +23,21 @@ function setBit(bit) {
     return 1 << bit;
 };
 
-function power(base, exponent) {
-    return Math.pow(base, exponent);
-};
 
 function toBoard(state) {
     let result = "+-+-+-+\n";
     for (let i = 0; i < 9; i++) {
-        if ((state & power(2, i)) !== 0) {
+        if ((state & (1 << i)) !== 0) {
             result += "|X";
         }
-        else if ((state & power(2, (i + 9))) !== 0) {
+        else if ((state & (1 << (i + 9))) !== 0) {
             result += '|O';
         }
         else {
             result += '| ';
         }
         if (((i + 1) % 3) == 0) {
-            result += '|\n+-+-+-+\n';
+            result += '|\n+-+-+-+\r\n';
         }
     }
     return result;
@@ -49,7 +46,7 @@ function toBoard(state) {
 function allFree(state) {
     let freeCells = [];
     for (let i = 0; i < 9; i++) {
-        if ((state & (power(2, i) + power(2, (i + 9)) ) ) === 0) {
+        if ((state & ( (1 << i) + (1 <<(i + 9)) )) === 0) {
             freeCells.push(i);
         }
     }
